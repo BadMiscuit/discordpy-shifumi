@@ -2,7 +2,7 @@ import discord
 import random
 from db import *
 
-moves = {'pierre': 0, 'papier': 1, 'feuille': 1, 'ciseaux': 2, 'puits': 3}
+moves = {'pierre': 0, 'feuille': 1, 'ciseaux': 2, 'puits': 3}
 emojis = {0: "\N{Raised Fist}", 1: "\N{Raised Hand}", 2: "\N{Victory Hand}", 3: "\N{OK Hand Sign}"}
 
 async def send_shifumi(ctx, *args):
@@ -16,7 +16,7 @@ async def send_shifumi(ctx, *args):
         if (args[0] == 'score'):
             await ctx.send(content=ctx.author.mention, embed=score(ctx))
             return
-        if (args[0] in moves):
+        if (args[0] in moves or args[0] == 'papier'):
             await ctx.send(content=ctx.author.mention, embed=play(ctx, args))
             return
         else:
@@ -28,7 +28,10 @@ async def send_shifumi(ctx, *args):
 
 def play(ctx, *args):
     bot = random.choice(list(moves.values()))
-    user = moves[args[0][0]]
+    if (args[0][0] == 'papier'):
+        user = 1
+    else:
+        user = moves[args[0][0]]
     result = 0 # 0 draw ; 1 user wins ; 2 user loses
     if (bot == user):
         pass
