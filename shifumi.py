@@ -10,6 +10,23 @@ from utils.db import *
 moves = {'pierre': 0, 'feuille': 1, 'papier': 1, 'ciseaux': 2, 'puits': 3}
 
 
+
+def get_result(user_move: str, bot_move: str):
+    result = 0 # draw = 0; user wins = 1; user loses = 2
+    if (user_move == bot_move): # draw
+        pass
+    elif (user_move != 3 and bot_move != 3): # no well
+        result = (1 if (((user_move | 1 << (2)) - (bot_move | 0 << (2))) % 3)\
+                else 2)
+    else:
+        result = (1 if \
+                ((user_move == 1 and bot_move == 3)\
+                or (user_move == 3 and bot_move != 1)\
+                ) else 2)
+    return result
+
+
+
 class ShifumiCog(commands.Cog):
     """
     Shifumi-with-well game.
@@ -62,21 +79,6 @@ class ShifumiCog(commands.Cog):
                 value="Score : {0} - {1}".format(user_score, bot_score),\
                 inline=False)
         return embed
-
-
-    def get_result(self, user_move: str, bot_move: str):
-        result = 0 # draw = 0; user wins = 1; user loses = 2
-        if (user_move == bot_move): # draw
-            pass
-        elif (user_move != 3 and bot_move != 3): # no well
-            result = (1 if (((user_move | 1 << (2)) - (bot_move | 0 << (2))) % 3)\
-                    else 2)
-        else:
-            result = (1 if \
-                    ((user_move == 1 and bot_move == 3)\
-                    or (user_move == 3 and bot_move != 1)\
-                    ) else 2)
-        return result
 
 
     def score(self, author, bot):
