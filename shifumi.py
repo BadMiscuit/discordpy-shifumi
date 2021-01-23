@@ -72,7 +72,7 @@ class ShifumiCog(commands.Cog):
         embed = discord.Embed(colour=discord.Colour.from_rgb(254, 254, 254),
             title="{0} vs {1}".format(ctx.author, ctx.bot.user),
             description="{0} vs {1}".format(\
-                emojis.shifumi[user_move], emojis.shifumi[bot_move]))
+                shifumi[user_move], shifumi[bot_move]))
         string_result = ("Match nul" if (result == 0) else \
                 ("Tu as gagné" if (result == 1) else "Tu as perdu"))
         embed.add_field(name=string_result,\
