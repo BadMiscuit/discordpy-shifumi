@@ -2,7 +2,7 @@ import discord
 import random
 
 from discord.ext import commands
-from utils.util import srs_only, logtrace
+from utils.util import guild_only, logtrace
 from utils.emojis import shifumi
 from utils.db import *
 
@@ -116,7 +116,7 @@ class ShifumiCog(commands.Cog):
 
 
     @commands.command(name='shifumi')
-    @srs_only()
+    @guild_only()
     async def send_shifumi(self, ctx, *args):
         """ Args parser and dispath method. """
         try:
