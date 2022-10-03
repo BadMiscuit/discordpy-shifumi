@@ -136,5 +136,5 @@ class ShifumiCog(commands.Cog):
         except Exception as e:
             await logtrace(ctx, e)
 
-def setup(bot):
-    bot.add_cog(ShifumiCog(bot))
+async def setup(bot):
+    await bot.add_cog(ShifumiCog(bot))
